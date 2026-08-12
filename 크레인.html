@@ -1,1 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이동식크레인 안전성 검토 프로그램</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .header h1 { font-size: 22px; margin-bottom: 8px; }
+        .header p { font-size: 13px; opacity: 0.9; }
+        .content { padding: 25px; }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+        }
+        .form-group input[readonly] {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+        .result-box {
+            background: #ffffff;
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            font-size: 13px;
+            color: #334155;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        .badge {
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .badge.ok { background: #d1fae5; color: #065f46; }
+        .badge.ng { background: #ffe4e6; color: #9f1239; }
+        .badge.wait { background: #e2e8f0; color: #475569; }
+        .btn-wrap { text-align: center; margin-top: 25px; }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🏗️ 이동식크레인 및 인양기구 안전성 검토 프로그램</h1>
+        <p>첨부된 현장 안전지침 기준(샤클, 슬링벨트, 크레인 정격하중) 자동 검토 도구</p>
+    </div>
+
+    <div class="content">
+        <!-- 1. 기본 정보 -->
+        <div class="card">
+            <div class="card-title">1. 기본 인양물 및 작업 조건</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>인양물 중량 (Ton)</label>
+                    <input type="number" id="loadWeight" value="10" step="0.1" oninput="calculateAll()">
+                </div>
+                <div class="form-group">
+                    <label>작업 구분 (안전율)</label>
+                    <select id="workType" onchange="calculateAll()">
+                        <option value="5">화물 지지 (안전율 5)</option>
+                        <option value="10">근로자 탑승 (안전율 10)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 샤클 검토 -->
+        <div class="card">
+            <div class="card-title">
+                <span>2. 샤클(Shackle) 안전성 검토 (안전율 3)</span>
+                <span id="shackleBadge" class="badge wait">대기중</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>샤클 규격 선택</label>
+                    <select id="shackleSpec" onchange="onShackleChange()">
+                        <option value="0.33">3/16 인치 (0.33t)</option>
+                        <option value="0.5">1/4 인치 (0.50t)</option>
+                        <option value="0.75">5/16 인치 (0.75t)</option>
+                        <option value="1">3/8 인치 (1.00t)</option>
+                        <option value="1.5">7/16 인치 (1.50t)</option>
+                        <option value="2">1/2 인치 (2.00t)</option>
+                        <option value="3.25">5/8 인치 (3.25t)</option>
+                        <option value="4.75">3/4 인치 (4.75t)</option>
+                        <option value="6.5">7/8 인치 (6.50t)</option>
+                        <option value="8.5">1 인치 (8.50t)</option>
+                        <option value="9.5">1-1/8 인치 (9.50t)</option>
+                        <option value="12">1-1/4 인치 (12.00t)</option>
+                        <option value="13.5">1-3/8 인치 (13.50t)</option>
+                        <option value="17">1-1/2 인치 (17.00t)</option>
+                        <option value="25" selected>1-3/4 인치 (25.00t)</option>
+                        <option value="35">2 인치 (35.00t)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>공인 사용하중 (Ton)</label>
+                    <input type="number" id="shackleWLL" value="25" readonly>
+                </div>
+                <div class="form-group">
+                    <label>사용 개수 (EA)</label>
+                    <input type="number" id="shackleCount" value="2" min="1" oninput="calculateAll()">
+                </div>
+            </div>
+            <div id="shackleDesc" class="result-box"></div>
+        </div>
+
+        <!-- 3. 슬링벨트 검토 -->
+        <div class="card">
+            <div class="card-title">
+                <span>3. 슬링벨트(줄걸이) 안전성 검토</span>
+                <span id="slingBadge" class="badge wait">대기중</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>벨트 폭 (mm)</label>
+                    <select id="slingWidth" onchange="calculateAll()">
+                        <option value="25">25 mm (절단하중 5t)</option>
+                        <option value="50">50 mm (절단하중 10t)</option>
+                        <option value="75">75 mm (절단하중 15t)</option>
+                        <option value="100" selected>100 mm (절단하중 20t)</option>
+                        <option value="125">125 mm (절단하중 25t)</option>
+                        <option value="150">150 mm (절단하중 30t)</option>
+                        <option value="200">200 mm (절단하중 40t)</option>
+                        <option value="250">250 mm (절단하중 50t)</option>
+                        <option value="300">300 mm (절단하중 60t)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>양중 방식 및 각도 계수</label>
+                    <select id="slingMethod" onchange="calculateAll()">
+                        <option value="1.0">Straight (수직 / 계수 1.0)</option>
+                        <option value="0.85">Choker - 60° 이내 (계수 0.85)</option>
+                        <option value="0.7">Choker - 90° 이내 (계수 0.7)</option>
+                        <option value="2.0">Basket - 수직 (계수 2.0)</option>
+                        <option value="1.73">Basket - 60° 이내 (계수 1.73)</option>
+                        <option value="1.41">Basket - 90° 이내 (계수 1.41)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>사용 개수 (EA)</label>
+                    <input type="number" id="slingCount" value="2" min="1" oninput="calculateAll()">
+                </div>
+            </div>
+            <div id="slingDesc" class="result-box"></div>
+        </div>
+
+        <!-- 4. 이동식크레인 정격하중 검토 -->
+        <div class="card">
+            <div class="card-title">
+                <span>4. 이동식크레인 정격하중 검토 (LTM 1095-5.1)</span>
+                <span id="craneBadge" class="badge wait">대기중</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>작업 반경 (M)</label>
+                    <input type="number" id="workRadius" value="6" min="3" max="25" oninput="calculateAll()">
+                </div>
+                <div class="form-group">
+                    <label>붐 길이 (M)</label>
+                    <select id="boomLength" onchange="calculateAll()">
+                        <option value="12.5">12.5 M</option>
+                        <option value="16.6">16.6 M</option>
+                        <option value="20.8">20.8 M</option>
+                        <option value="25.0" selected>25.0 M</option>
+                        <option value="29.2">29.2 M</option>
+                        <option value="33.4">33.4 M</option>
+                    </select>
+                </div>
+            </div>
+            <div id="craneDesc" class="result-box"></div>
+        </div>
+
+        <div class="btn-wrap">
+            <button class="btn" onclick="calculateAll()">안전성 검토 실행</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 샤클 규격 변경 시 WLL 값 동기화
+    function onShackleChange() {
+        const sel = document.getElementById('shackleSpec');
+        document.getElementById('shackleWLL').value = sel.value;
+        calculateAll();
+    }
+
+    // 크레인 정격하중 표 매핑 데이터 (LTM 1095-5.1 기준)
+    function getCraneCapacity(radius, boom) {
+        const table = {
+            3:  { 12.5: 63.3, 16.6: 63.3, 20.8: 60.2, 25.0: 48.5, 29.2: 38.0, 33.4: 29.9 },
+            4:  { 12.5: 62.8, 16.6: 62.8, 20.8: 59.3, 25.0: 48.5, 29.2: 38.0, 33.4: 29.9 },
+            5:  { 12.5: 54.2, 16.6: 54.6, 20.8: 53.3, 25.0: 47.2, 29.2: 37.6, 33.4: 29.9 },
+            6:  { 12.5: 46.3, 16.6: 46.7, 20.8: 46.8, 25.0: 45.1, 29.2: 36.6, 33.4: 29.4 },
+            7:  { 12.5: 39.9, 16.6: 40.2, 20.8: 40.3, 25.0: 40.1, 29.2: 35.5, 33.4: 28.9 },
+            8:  { 12.5: 34.5, 16.6: 35.0, 20.8: 35.2, 25.0: 35.6, 29.2: 33.2, 33.4: 28.0 },
+            10: { 12.5: 26.5, 16.6: 27.2, 20.8: 27.6, 25.0: 28.1, 29.2: 28.5, 33.4: 25.4 }
+        };
+        if (table[radius] && table[radius][boom]) {
+            return table[radius][boom];
+        }
+        return Math.max(5.0, 55.0 - (radius * 1.5) + (boom * 0.05));
+    }
+
+    // 종합 안전성 산식 실행 함수
+    function calculateAll() {
+        const load = parseFloat(document.getElementById('loadWeight').value) || 0;
+        const safetyFactor = parseFloat(document.getElementById('workType').value) || 5;
+
+        // 1. 샤클 검토 (안전율 3 고정)
+        const sWLL = parseFloat(document.getElementById('shackleWLL').value) || 0;
+        const sCount = parseInt(document.getElementById('shackleCount').value) || 1;
+        const shackleAllowable = (sWLL * sCount) / 3;
+        const shackleOk = shackleAllowable > load;
+        
+        const sBadge = document.getElementById('shackleBadge');
+        sBadge.textContent = shackleOk ? "OK" : "NG";
+        sBadge.className = "badge " + (shackleOk ? "ok" : "ng");
+        
+        document.getElementById('shackleDesc').innerHTML = 
+            `• 공식: (사용하중 ${sWLL}t × 수량 ${sCount}) ÷ 안전율 3 = <b>${shackleAllowable.toFixed(2)} Ton</b><br>` +
+            `• 판정: 안전하중(${shackleAllowable.toFixed(2)}t) ${shackleOk ? '&gt;' : '&le;'} 인양중량(${load}t) ➔ <b>${shackleOk ? '안전성 확보 (OK)' : '보완 필요 (NG)'}</b>`;
+
+        // 2. 슬링벨트 검토
+        const sWidth = parseInt(document.getElementById('slingWidth').value) || 100;
+        const sFactor = parseFloat(document.getElementById('slingMethod').value) || 1.0;
+        const slingCount = parseInt(document.getElementById('slingCount').value) || 2;
+        
+        const breakingMap = { 25: 5, 50: 10, 75: 15, 100: 20, 125: 25, 150: 30, 200: 40, 250: 50, 300: 60 };
+        const breakingLoad = breakingMap[sWidth] || 20;
+        
+        const slingAllowable = (breakingLoad * slingCount * sFactor) / safetyFactor;
+        const slingOk = slingAllowable > load;
+
+        const slBadge = document.getElementById('slingBadge');
+        slBadge.textContent = slingOk ? "OK" : "NG";
+        slBadge.className = "badge " + (slingOk ? "ok" : "ng");
+
+        document.getElementById('slingDesc').innerHTML = 
+            `• 공식: (절단하중 ${breakingLoad}t × 수량 ${slingCount}개 × 각도계수 ${sFactor}) ÷ 안전율 ${safetyFactor} = <b>${slingAllowable.toFixed(2)} Ton</b><br>` +
+            `• 판정: 안전하중(${slingAllowable.toFixed(2)}t) ${slingOk ? '&gt;' : '&le;'} 인양중량(${load}t) ➔ <b>${slingOk ? '안전성 확보 (OK)' : '보완 필요 (NG)'}</b>`;
+
+        // 3. 크레인 정격하중 검토
+        const radius = parseFloat(document.getElementById('workRadius').value) || 6;
+        const boom = parseFloat(document.getElementById('boomLength').value) || 25.0;
+        const maxCapacity = getCraneCapacity(radius, boom);
+        const craneAllowable = maxCapacity * 0.85; // 지침 적용 85%
+        const craneOk = craneAllowable > load;
+
+        const cBadge = document.getElementById('craneBadge');
+        cBadge.textContent = craneOk ? "OK" : "NG";
+        cBadge.className = "badge " + (cBadge.textContent === "OK" ? "ok" : "ng"); // 버그 방지 직접 할당
+        cBadge.className = "badge " + (craneOk ? "ok" : "ng");
+
+        document.getElementById('craneDesc').innerHTML = 
+            `• 크레인 최대능력: ${maxCapacity.toFixed(1)}t (반경 ${radius}m, 붐 ${boom}m) × 85% = <b>${craneAllowable.toFixed(2)} Ton</b><br>` +
+            `• 판정: 크레인 허용하중(${craneAllowable.toFixed(2)}t) ${craneOk ? '&gt;' : '&le;'} 인양중량(${load}t) ➔ <b>${craneOk ? '작업 가능 (OK)' : '작업 불가 / 반경 축소 필요 (NG)'}</b>`;
+    }
+
+    // 문서 로드 직후 최초 자동 계산 수행
+    window.onload = function() {
+        calculateAll();
+    };
+</script>
+
+</body>
+</html>
 
