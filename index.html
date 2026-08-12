@@ -35,12 +35,13 @@
                     <button onclick="openExternalLink('https://adl-rho.vercel.app/risk.html')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition flex items-center">
                         <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>위험성평가 자동화 <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs opacity-60"></i>
                     </button>
-                    <!-- 이동식크레인 안정성검토 프로그램 (업데이트된 링크 적용) -->
+                    <!-- 이동식크레인 안정성검토 프로그램 링크 -->
                     <button onclick="openExternalLink('https://adl-rho.vercel.app/크레인.html')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition flex items-center">
                         <i class="fa-solid fa-truck-ramp-box mr-1.5"></i>이동식크레인 안정성검토 <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs opacity-60"></i>
                     </button>
-                    <button onclick="switchTab('board')" id="nav-board" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition">
-                        <i class="fa-solid fa-clipboard-list mr-1.5"></i>게시판
+                    <!-- 게시판 외부 패들릿 링크 연결 -->
+                    <button onclick="openExternalLink('https://padlet.com/lyj2666/padlet-ingv0gu6yug12orb')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-clipboard-list mr-1.5"></i>게시판 <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs opacity-60"></i>
                     </button>
                 </nav>
 
@@ -66,7 +67,7 @@
             <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-blue-600 bg-blue-50">홈</button>
             <button onclick="openExternalLink('https://adl-rho.vercel.app/risk.html'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:bg-gray-50">위험성평가 자동화 ↗</button>
             <button onclick="openExternalLink('https://adl-rho.vercel.app/크레인.html'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:bg-gray-50">이동식크레인 안정성검토 ↗</button>
-            <button onclick="switchTab('board'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:bg-gray-50">게시판</button>
+            <button onclick="openExternalLink('https://padlet.com/lyj2666/padlet-ingv0gu6yug12orb'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:bg-gray-50">게시판 (패들릿) ↗</button>
         </div>
     </header>
 
@@ -80,14 +81,14 @@
                 <div class="space-y-2 mb-4 md:mb-0">
                     <span class="bg-blue-500 bg-opacity-40 text-blue-100 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">스마트 안전관리</span>
                     <h1 class="text-2xl sm:text-3xl font-bold">안전하고 쾌적한 작업장을 위한 위험성평가 및 중장비 검토</h1>
-                    <p class="text-blue-100 text-sm sm:text-base">위험성평가 자동화 및 이동식크레인 안정성 검토 프로그램을 활용하여 현장 안전을 확보하세요.</p>
+                    <p class="text-blue-100 text-sm sm:text-base">위험성평가 자동화, 이동식크레인 검토 및 패들릿 게시판을 활용하여 현장 소통을 강화하세요.</p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                     <button onclick="openExternalLink('https://adl-rho.vercel.app/risk.html')" class="bg-white text-blue-600 font-semibold px-4 py-2.5 rounded-xl shadow hover:bg-blue-50 transition text-center text-sm">
                         위험성평가 자동화 ↗
                     </button>
-                    <button onclick="openExternalLink('https://adl-rho.vercel.app/크레인.html')" class="bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow hover:bg-blue-600 transition text-center text-sm border border-blue-400">
-                        크레인 안정성검토 ↗
+                    <button onclick="openExternalLink('https://padlet.com/lyj2666/padlet-ingv0gu6yug12orb')" class="bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow hover:bg-blue-600 transition text-center text-sm border border-blue-400">
+                        게시판(패들릿) 이동 ↗
                     </button>
                 </div>
             </div>
@@ -139,45 +140,17 @@
                 </div>
             </div>
 
-            <!-- 최근 평가 목록 및 빠른 메뉴 -->
+            <!-- 빠른 안내 패널 -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold text-gray-900">최근 위험성 평가 현황</h2>
-                        <button onclick="openExternalLink('https://adl-rho.vercel.app/risk.html')" class="text-sm text-blue-600 font-semibold hover:underline">외부 시스템 연결</button>
+                <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6 shadow-sm flex flex-col justify-center items-center text-center py-12">
+                    <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 shadow-inner">
+                        <i class="fa-solid fa-comments"></i>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase">
-                                    <th class="py-3 px-4">공정명</th>
-                                    <th class="py-3 px-4">유해·위험요인</th>
-                                    <th class="py-3 px-4">위험성(중대성×가능성)</th>
-                                    <th class="py-3 px-4">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100 text-sm">
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-3 px-4 font-medium">프레스 기계 가공 공정</td>
-                                    <td class="py-3 px-4 text-gray-600">금형 사이에 손가락 끼임</td>
-                                    <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">고 (High - 12)</span></td>
-                                    <td class="py-3 px-4"><span class="text-amber-600 font-medium">개선조치중</span></td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-3 px-4 font-medium">지게차 자재 운반 공정</td>
-                                    <td class="py-3 px-4 text-gray-600">보행자와 충돌 위험</td>
-                                    <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">중 (Medium - 6)</span></td>
-                                    <td class="py-3 px-4"><span class="text-green-600 font-medium">조치완료</span></td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-3 px-4 font-medium">용접 및 절단 작업</td>
-                                    <td class="py-3 px-4 text-gray-600">화재 및 유독가스 흡입</td>
-                                    <td class="py-3 px-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">중 (Medium - 6)</span></td>
-                                    <td class="py-3 px-4"><span class="text-green-600 font-medium">조치완료</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">실시간 소통형 패들릿 게시판 안내</h2>
+                    <p class="text-gray-600 text-sm max-w-md mb-6">현장 안전 건의사항 및 자료 공유는 외부 패들릿 게시판을 통해 실시간으로 소통하실 수 있습니다.</p>
+                    <button onclick="openExternalLink('https://padlet.com/lyj2666/padlet-ingv0gu6yug12orb')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl shadow transition text-sm">
+                        패들릿 게시판 바로가기 ↗
+                    </button>
                 </div>
 
                 <!-- 빠른 공지/알림 패널 -->
@@ -187,7 +160,7 @@
                         <div class="space-y-4">
                             <div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
                                 <span class="text-xs text-blue-600 font-bold block mb-1">2026.08.12</span>
-                                <p class="text-sm font-medium text-gray-800">이동식크레인 양중 작업 전 안정성 검토 의무화</p>
+                                <p class="text-sm font-medium text-gray-800">패들릿 게시판 시스템 연동 완료 안내</p>
                             </div>
                             <div class="p-3 bg-gray-50 border-l-4 border-gray-400 rounded-r-lg">
                                 <span class="text-xs text-gray-500 font-bold block mb-1">2026.08.05</span>
@@ -195,127 +168,14 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="switchTab('board')" class="mt-6 w-full py-2.5 border border-gray-300 text-gray-700 rounded-xl font-medium text-sm hover:bg-gray-50 transition">
-                        게시판 바로가기
+                    <button onclick="openExternalLink('https://padlet.com/lyj2666/padlet-ingv0gu6yug12orb')" class="mt-6 w-full py-2.5 border border-gray-300 text-gray-700 rounded-xl font-medium text-sm hover:bg-gray-50 transition">
+                        패들릿 열기 ↗
                     </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 게시판 탭 -->
-        <section id="tab-board" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-1">안전관리 게시판</h2>
-                        <p class="text-gray-600 text-sm">위험성평가 및 이동식크레인 안정성 검토 자료공유, 건의사항 소통 공간입니다.</p>
-                    </div>
-                    <button onclick="openPostModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2.5 rounded-lg shadow transition flex items-center text-sm">
-                        <i class="fa-solid fa-pen-to-square mr-2"></i> 글쓰기
-                    </button>
-                </div>
-
-                <!-- 게시글 검색 및 필터 -->
-                <div class="flex items-center space-x-2 mb-6">
-                    <div class="relative flex-grow">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                            <i class="fa-solid fa-search"></i>
-                        </span>
-                        <input type="text" placeholder="검색어를 입력하세요 (제목, 내용)" class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                    </div>
-                    <select class="px-4 py-2 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none">
-                        <option>전체 카테고리</option>
-                        <option>공지사항</option>
-                        <option>개선 건의</option>
-                        <option>자료실</option>
-                    </select>
-                </div>
-
-                <!-- 게시판 목록 테이블 -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase bg-gray-50">
-                                <th class="py-3 px-4 w-16 text-center">번호</th>
-                                <th class="py-3 px-4 w-28 text-center">분류</th>
-                                <th class="py-3 px-4">제목</th>
-                                <th class="py-3 px-4 w-32">작성자</th>
-                                <th class="py-3 px-4 w-28 text-center">등록일</th>
-                                <th class="py-3 px-4 w-20 text-center">조회</th>
-                            </tr>
-                        </thead>
-                        <tbody id="boardTableBody" class="divide-y divide-gray-100 text-sm">
-                            <tr class="hover:bg-gray-50 cursor-pointer">
-                                <td class="py-3 px-4 text-center text-gray-500">3</td>
-                                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-700">공지</span></td>
-                                <td class="py-3 px-4 font-medium text-gray-900">이동식크레인 안정성검토 프로그램 연동 안내</td>
-                                <td class="py-3 px-4 text-gray-600">안전관리자</td>
-                                <td class="py-3 px-4 text-center text-gray-500">2026.08.12</td>
-                                <td class="py-3 px-4 text-center text-gray-500">142</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 cursor-pointer">
-                                <td class="py-3 px-4 text-center text-gray-500">2</td>
-                                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-700">건의</span></td>
-                                <td class="py-3 px-4 font-medium text-gray-900">제2공장 원료 투입구 주변 미끄럼 방지 조치 요청</td>
-                                <td class="py-3 px-4 text-gray-600">생산2팀장</td>
-                                <td class="py-3 px-4 text-center text-gray-500">2026.08.08</td>
-                                <td class="py-3 px-4 text-center text-gray-500">85</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 cursor-pointer">
-                                <td class="py-3 px-4 text-center text-gray-500">1</td>
-                                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs font-semibold bg-gray-100 text-gray-700">자료</span></td>
-                                <td class="py-3 px-4 font-medium text-gray-900">제조업 위험성평가 가이드라인 매뉴얼 (PDF)</td>
-                                <td class="py-3 px-4 text-gray-600">보건관리자</td>
-                                <td class="py-3 px-4 text-center text-gray-500">2026.08.01</td>
-                                <td class="py-3 px-4 text-center text-gray-500">230</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- 페이지네이션 -->
-                <div class="flex justify-center items-center mt-6 space-x-1">
-                    <button class="px-3 py-1.5 rounded border border-gray-300 text-gray-500 text-sm hover:bg-gray-50">이전</button>
-                    <button class="px-3 py-1.5 rounded bg-blue-600 text-white text-sm font-semibold">1</button>
-                    <button class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 text-sm hover:bg-gray-50">2</button>
-                    <button class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 text-sm hover:bg-gray-50">다음</button>
                 </div>
             </div>
         </section>
 
     </main>
-
-    <!-- 글쓰기 모달 창 -->
-    <div id="postModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4">
-            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                <h3 class="text-lg font-bold text-gray-900">새 게시글 작성</h3>
-                <button onclick="closePostModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <form id="modalPostForm" onsubmit="handleNewPost(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">카테고리</label>
-                    <select id="postCategory" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="공지">공지사항</option>
-                        <option value="건의">개선 건의</option>
-                        <option value="자료">자료실</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">제목</label>
-                    <input type="text" id="postTitle" required placeholder="제목을 입력하세요" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">내용</label>
-                    <textarea id="postContent" rows="4" required placeholder="내용을 입력하세요" class="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <div class="flex justify-end space-x-2 pt-2">
-                    <button type="button" onclick="closePostModal()" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50">취소</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 shadow">등록</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- 푸터 -->
     <footer class="bg-white border-t border-gray-200 mt-12 py-6 text-center text-xs text-gray-500">
@@ -324,7 +184,7 @@
 
     <!-- JavaScript 기능 구현 -->
     <script>
-        // 외부 링크 강제 이동 처리 함수 (한글 URL 지원)
+        // 외부 링크 강제 이동 처리 함수
         function openExternalLink(url) {
             try {
                 const newWindow = window.open(encodeURI(url), '_blank');
@@ -336,7 +196,7 @@
             }
         }
 
-        // 탭 전환 함수 (홈, 게시판 간 전환)
+        // 홈 탭 전환 함수
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(el => el.classList.add('hidden'));
@@ -346,25 +206,10 @@
                 targetTab.classList.remove('hidden');
             }
 
-            // 네비게이션 버튼 스타일 초기화 및 활성화
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => {
-                btn.classList.remove('text-blue-600', 'bg-blue-50');
-                btn.classList.add('text-gray-600', 'hover:text-blue-600', 'hover:bg-gray-50');
-            });
-
-            if(tabId === 'home') {
-                const homeBtn = document.getElementById('nav-home');
-                if(homeBtn) {
-                    homeBtn.classList.remove('text-gray-600', 'hover:text-blue-600', 'hover:bg-gray-50');
-                    homeBtn.classList.add('text-blue-600', 'bg-blue-50');
-                }
-            } else if(tabId === 'board') {
-                const boardBtn = document.getElementById('nav-board');
-                if(boardBtn) {
-                    boardBtn.classList.remove('text-gray-600', 'hover:text-blue-600', 'hover:bg-gray-50');
-                    boardBtn.classList.add('text-blue-600', 'bg-blue-50');
-                }
+            const homeBtn = document.getElementById('nav-home');
+            if(homeBtn) {
+                homeBtn.classList.remove('text-gray-600', 'hover:text-blue-600', 'hover:bg-gray-50');
+                homeBtn.classList.add('text-blue-600', 'bg-blue-50');
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -374,48 +219,6 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
-        }
-
-        // 게시판 모달 제어
-        function openPostModal() {
-            document.getElementById('postModal').classList.remove('hidden');
-        }
-
-        function closePostModal() {
-            document.getElementById('postModal').classList.add('hidden');
-        }
-
-        // 새 글 등록 처리
-        let postCounter = 4;
-        function handleNewPost(e) {
-            e.preventDefault();
-            const category = document.getElementById('postCategory').value;
-            const title = document.getElementById('postTitle').value;
-            const content = document.getElementById('postContent').value;
-            
-            const tbody = document.getElementById('boardTableBody');
-            const newRow = document.createElement('tr');
-            newRow.className = 'hover:bg-gray-50 cursor-pointer';
-
-            let badgeClass = 'bg-blue-100 text-blue-700';
-            if(category === '건의') badgeClass = 'bg-green-100 text-green-700';
-            if(category === '자료') badgeClass = 'bg-gray-100 text-gray-700';
-
-            const today = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
-
-            newRow.innerHTML = `
-                <td class="py-3 px-4 text-center text-gray-500">${postCounter++}</td>
-                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs font-semibold ${badgeClass}">${category}</span></td>
-                <td class="py-3 px-4 font-medium text-gray-900">${title}</td>
-                <td class="py-3 px-4 text-gray-600">관리자</td>
-                <td class="py-3 px-4 text-center text-gray-500">${today}</td>
-                <td class="py-3 px-4 text-center text-gray-500">1</td>
-            `;
-
-            tbody.prepend(newRow);
-            closePostModal();
-            document.getElementById('modalPostForm').reset();
-            alert('게시글이 성공적으로 등록되었습니다.');
         }
     </script>
 </body>
